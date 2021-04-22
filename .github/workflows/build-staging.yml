@@ -46,7 +46,7 @@ jobs:
           service_principal: ${{ secrets.APP_ID }}
           service_principal_password: ${{ secrets.SP_SECRET }}
           tenant: ${{ secrets.TENANT_ID }}
-          registry: ${{ secrets.ACR_NAME }}
+          registry: ${{ secrets.ACR }}
           repository: contoso-website
           tag: latest
           
