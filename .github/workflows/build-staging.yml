@@ -43,6 +43,11 @@ jobs:
         # uses: ams0/acr-task-github-action@bc2f02f4e97c4912d2b17fa7e35a1e2caa66ed09
         uses: ams0/acr-task-github-action@v2
         with:
+          service_principal: ${{ secrets.APP_ID }}
+          service_principal_password: ${{ secrets.SP_SECRET }}
+          tenant: ${{ secrets.TENANT_ID }}
           repository: contoso-website
           tag: latest
           folder: .
+          
+          
