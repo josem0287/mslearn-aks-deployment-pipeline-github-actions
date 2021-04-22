@@ -49,6 +49,5 @@ jobs:
           registry: ${{ secrets.ACR_NAME }}
           repository: contoso-website
           tag: latest
-          folder: .
           
           
