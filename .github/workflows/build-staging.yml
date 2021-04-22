@@ -39,6 +39,6 @@ jobs:
           username: ${{ secrets.ACR_LOGIN }}
           password: ${{ secrets.ACR_PASSWORD }}
       - run: |
-          docker build . -t ${{ secrets.ACR_NAME }}/sampleapp:${{ github.sha }}
-          docker push ${{ secrets.ACR_NAME }}/sampleapp:${{ github.sha }}
+          docker build . -t ${{ secrets.ACR_NAME }}/contoso-website:latest
+          docker push ${{ secrets.ACR_NAME }}/contoso-website:latest
           
