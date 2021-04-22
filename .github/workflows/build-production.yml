@@ -30,5 +30,6 @@ jobs:
           username: ${{ secrets.ACR_LOGIN }}
           password: ${{ secrets.ACR_PASSWORD }}
       - run: |
-          docker build . -t "${{ secrets.ACR_NAME }}/contoso-website:${GITHUB_REF#refs/tags}"
-          docker push "${{ secrets.ACR_NAME }}/contoso-website:${GITHUB_REF#refs/tags}"
+          variable=${GITHUB_REF#refs/tags//"/"/-}
+          docker build . -t ${{ secrets.ACR_NAME }}/contoso-website:$variable
+          docker push ${{ secrets.ACR_NAME }}/contoso-website:$variable
