@@ -22,6 +22,10 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
+          
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
 
       - name: Build and push production images
         uses: azure/docker-login@v1
@@ -30,6 +34,5 @@ jobs:
           username: ${{ secrets.ACR_LOGIN }}
           password: ${{ secrets.ACR_PASSWORD }}
       - run: |
-          variable=${GITHUB_REF#refs/tags//"/"/-}
-          docker build . -t ${{ secrets.ACR_NAME }}/contoso-website:$variable
-          docker push ${{ secrets.ACR_NAME }}/contoso-website:$variable
+          docker build . -t ${{ secrets.ACR_NAME }}/contoso-website:$VERSION
+          docker push ${{ secrets.ACR_NAME }}/contoso-website:$VERSION
