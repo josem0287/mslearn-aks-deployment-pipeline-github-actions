@@ -57,12 +57,6 @@ jobs:
           resource-group: mslearn-gh-pipelines-7437
           # AKS cluster name
           cluster-name: contoso-video
-          
-      - name: Set Repo Name
-        id: string
-        run: |
-          string=${{ secrets.ACR_NAME }}
-          echo ::set-output name=REPO::${string,,}
 
       - name: Run Helm Deploy
         run: |
@@ -74,8 +68,5 @@ jobs:
             --namespace staging \
             contoso-website \
             ./kubernetes/contoso-website \
-            --set image.repository=$REPO \
+            --set image.repository=${{ secrets.ACR_NAME }} \
             --set dns.name=${{ secrets.DNS_NAME }}
-          env: 
-            REPO: ${{ steps.string.outputs.REPO }}
-          
