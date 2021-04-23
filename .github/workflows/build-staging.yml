@@ -63,15 +63,11 @@ jobs:
           # AKS cluster name
           cluster-name: contoso-video
           
-      - name: Change String Case
-        # You may pin to the exact commit or the version.
-        # uses: ASzc/change-string-case-action@bafc781cc39d14efd3aaa6cd793c6b5f9f94d86a
-        uses: ASzc/change-string-case-action@v2
+      - name: Set Repo Name
+        id: string
+        uses: ASzc/change-string-case-action@v1
         with:
-          # The input string
           string: ${{ secrets.ACR_NAME }}
-      - run: |
-          echo ::set-output name=REPO::"${{ steps.string.outputs.lowercase }}"
 
       - name: Run Helm Deploy
         run: |
@@ -86,5 +82,5 @@ jobs:
             --set image.repository=$REPO \
             --set dns.name=${{ secrets.DNS_NAME }}
           env: 
-            REPO: ${{ steps.get_version.outputs.REPO }}
+            REPO: ${{ steps.string.outputs.lowercase }}
           
