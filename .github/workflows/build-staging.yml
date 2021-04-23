@@ -70,10 +70,10 @@ jobs:
             --create-namespace \
             --atomic \
             --wait \
-            --timeout 800s \
             --namespace staging \
             contoso-website \
             ./kubernetes/contoso-website \
-            --set image.repository=${{ secrets.ACR_NAME }} \
+            --set image.repository=$REPO \
             --set dns.name=${{ secrets.DNS_NAME }}
+          env: echo "REPO=${{ secrets.ACR_NAME }}" >>${GITHUB_ENV}
           
