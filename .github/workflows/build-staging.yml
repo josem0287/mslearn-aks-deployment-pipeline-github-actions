@@ -60,9 +60,9 @@ jobs:
           
       - name: Set Repo Name
         id: string
-        uses: ASzc/change-string-case-action@v2
-        with:
-          string: ${{ secrets.ACR_NAME }}
+        run: |
+          string=${{ secrets.ACR_NAME }}
+          echo ::set-output name=REPO::${string,,}
 
       - name: Run Helm Deploy
         run: |
@@ -77,5 +77,5 @@ jobs:
             --set image.repository=$REPO \
             --set dns.name=${{ secrets.DNS_NAME }}
           env: 
-            REPO: ${{ steps.string.outputs.lowercase }}
+            REPO: ${{ steps.string.outputs.REPO }}
           
