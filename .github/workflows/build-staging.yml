@@ -75,5 +75,5 @@ jobs:
             ./kubernetes/contoso-website \
             --set image.repository=$REPO \
             --set dns.name=${{ secrets.DNS_NAME }}
-          env: echo "REPO=${{ secrets.ACR_NAME }}" >>${GITHUB_ENV}
+          env: echo "REPO=${{ secrets.ACR_NAME,, }}" >>${GITHUB_ENV}
           
