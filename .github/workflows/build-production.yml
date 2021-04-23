@@ -72,5 +72,5 @@ jobs:
             --set image.registry=${{ secrets.ACR_NAME }} \
             --set dns.name=${{ secrets.DNS_NAME }} \
             --set image.tag=$VERSION
-          env: 
-            VERSION: ${{ steps.get_version.outputs.VERSION }}
+        env: 
+          VERSION: ${{ steps.get_version.outputs.VERSION }}
