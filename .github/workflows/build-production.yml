@@ -46,6 +46,10 @@ jobs:
         with:
           version: v3.3.1
 
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+
       - name: Get AKS Credentials
         uses: Azure/aks-set-context@v1
         with:
@@ -67,4 +71,6 @@ jobs:
             ./kubernetes/contoso-website \
             --set image.repository=${{ secrets.ACR_NAME }} \
             --set dns.name=${{ secrets.DNS_NAME }} \
-            --set image.tag=${GITHUB_REF##*/}
+            --set image.tag=$VERSION
+          env: 
+            VERSION: ${{ steps.get_version.outputs.VERSION }}
